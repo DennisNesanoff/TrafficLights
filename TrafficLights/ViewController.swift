@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 enum ColorOfTraffic {
     case red, yellow, green, off
 }
@@ -17,22 +18,27 @@ class ViewController: UIViewController {
     @IBOutlet var greenColor: UIView!
     @IBOutlet var button: UIButton!
     
-    var traffic = ColorOfTraffic.off
-    let isOff: CGFloat = 0.3
-    let isOn: CGFloat = 1.0
+    private var traffic = ColorOfTraffic.off
+    private let isOff: CGFloat = 0.3
+    private let isOn: CGFloat = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        redColor.layer.cornerRadius = redColor.bounds.height / 2
-        yellowColor.layer.cornerRadius = yellowColor.bounds.height / 2
-        greenColor.layer.cornerRadius = greenColor.bounds.height / 2
         
         redColor.alpha = isOff
         yellowColor.alpha = isOff
         greenColor.alpha = isOff
     }
+    
+    override func viewWillLayoutSubviews() {
+        redColor.layer.cornerRadius = redColor.frame.height / 2
+        yellowColor.layer.cornerRadius = yellowColor.frame.height / 2
+        greenColor.layer.cornerRadius = greenColor.frame.height / 2
+    }
 
     @IBAction func setColor(_ sender: UIButton) {
+        
+        button.setTitle("Next", for: .normal)
         
         switch traffic {
         case .off:
